@@ -1,0 +1,212 @@
+:root {
+    --font-size-default: 32px;
+    --font-size-lijstbutton: 24px;
+
+    --color: #fff;
+    --input-color: #fff;
+    --button-color: #fff;
+    --placeholder-color: #fff;
+
+    --background-color: #262626;
+    --background-input-color: #565656;
+    --background-button-color: #565656;
+    --background-placeholder-color: #262626;
+
+    --border: 1px solid #999;
+    --border-input: 1px solid #999;
+    --border-button: 1px solid #999;
+    --border-placeholder: 1px solid #999;
+
+    --border-radius: 5px;
+    --border-input-radius: 5px;
+    --border-button-radius: 5px;
+    --border-placeholder-radius: 5px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);        
+}
+
+
+
+h1,
+h2 {
+    display: flex;
+    justify-content: center;
+    font-size: var(--font-size-default);
+    color: var(--color);
+}
+
+#lijst div a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 5px;
+    max-width: 75%;
+}
+
+#lijst div button {
+    font-size: var(--font-size-lijstbutton);
+    padding: 20px 0;
+    color: var(--button-color);
+    border-radius: 10px;
+    border: var(--border-button);
+    border-radius: var(--border-button-radius);
+    background-color: var(--background-button-color);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+#content input,
+#content select,
+#content button {
+    width: 100%;           
+    padding: 50px;         
+    font-size: var(--font-size-default);
+    border: 1px solid #999;
+    border-radius: 4px;
+    margin: 15px 0;
+    background-color: #fff;
+}
+
+#content input,
+#content select {
+    background-color: var(--background-input-color);
+    border: var(--border-input);
+    border-radius: var(--border-input-radius);
+    color: var(--input-color);
+}
+
+#content button,
+#backBtn {
+    background-color: var(--background-button-color);
+    border: var(--border-button);
+    border-radius: var(--border-button-radius);
+    color: var(--button-color);
+}
+
+#content ::placeholder {
+    color: var(--placeholder-color);
+    font-size: var(--font-size-default);
+}
+
+
+
+#resultaat {
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 15px 0;
+    font-size: var(--font-size-default);
+
+    opacity: 0;
+    border-width: 0;
+    padding: 0;
+
+    transition: all 0.3s ease;
+    color: var(--color);
+}
+
+
+#header {
+    display: flex;
+    align-items: center;     
+    justify-content: space-between; 
+    position: relative;
+    margin: 0 auto;
+    padding: 115px 0 0 0;
+    font-size: 20px;
+    max-width: 75%;
+}
+
+/* Back knop */
+#back-container {
+    flex: 0 0 auto;           
+}
+
+/* Titel */
+#titel {
+    position: absolute;       
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Button styling */
+#back-container button {
+    font-size: var(--font-size-default);
+    padding: 20px 20px;
+    cursor: pointer;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+.field {
+    position: relative;
+    margin: 25px 0;
+}
+
+.field label {
+    position: absolute;
+    left: 20px;
+    font-size: var(--font-size-default);
+    color: var(--placeholder-color);
+    pointer-events: none;
+    transition: 0.25s ease;
+
+    background-color: var(--background-placeholder-color);
+    border: var(--border-placeholder);
+    border-radius: var(--border-placeholder-radius);
+    padding: 0 10px;
+}
+
+.field select {
+    width: 100%;
+    padding: 50px 20px 20px 20px;
+    font-size: var(--font-size-default);
+    border: var(--border-input);
+    border-radius: var(--border-input-radius);
+    background: var(--background-input-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+#content input:focus,
+#content input:valid,
+#content input:not(:placeholder-shown),
+#content select:focus {
+    background-color: var(--background-input-color);
+    color: var(--input-color);
+}
+
+#content input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--background-input-color) inset;
+    -webkit-text-fill-color: var(--input-color);
+}
