@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+
+    <!-- PWA -->
+    <link
+      rel="apple-touch-startup-image"
+      href="icons/splash-screen-1080x1920.png"
+    />
+
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js");
+      }
+
+      window.addEventListener("load", () => {
+        const splashShown = localStorage.getItem("splashShown");
+
+        const nav = performance.getEntriesByType("navigation")[0];
+        const isFreshStart =
+          nav.type === "navigate" && document.referrer === "" && !splashShown;
+
+        if (isFreshStart) {
+          const splash = document.createElement("div");
+          splash.style.position = "fixed";
+          splash.style.top = "0";
+          splash.style.left = "0";
+          splash.style.width = "100%";
+          splash.style.height = "100%";
+          splash.style.background =
+            "url('icons/splash-screen-1080x1920.png') center center / cover no-repeat";
+          splash.style.zIndex = "9999";
+          splash.style.transition = "opacity 0.5s";
+          document.body.appendChild(splash);
+
+          setTimeout(() => {
+            splash.style.opacity = "0";
+            setTimeout(() => splash.remove(), 500);
+          }, 3000);
+
+          localStorage.setItem("splashShown", "true");
+        }
+      });
+    </script>
+
+    <!-- Main script -->
+    <script type="module" src="./js/script.js" defer></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <title>AudioApp</title>
+  </head>
+
+  <body>
+    <h2>CUSTOMLOWZZZ</h2>
+    <div id="lijst"></div>
+  </body>
+</html>
