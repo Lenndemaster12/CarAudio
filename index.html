@@ -21,44 +21,42 @@
     />
     <meta name="mobile-web-app-capable" content="yes" />
 
-     <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./service-worker.js");
-  }
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js");
+      }
 
-  window.addEventListener("load", () => {
-    const splashShown = localStorage.getItem("splashShown");
+      window.addEventListener("load", () => {
+        const splashShown = localStorage.getItem("splashShown");
 
-    // Detecteer of dit een echte app-start is
-    const isFreshStart =
-      performance.navigation.type === performance.navigation.TYPE_NAVIGATE &&
-      document.referrer === "" &&
-      !splashShown;
+        // Splash alleen tonen bij echte app-start
+        const isFreshStart =
+          performance.getEntriesByType("navigation")[0].type === "navigate" &&
+          document.referrer === "" &&
+          !splashShown;
 
-    if (isFreshStart) {
-      const splash = document.createElement("div");
-      splash.style.position = "fixed";
-      splash.style.top = "0";
-      splash.style.left = "0";
-      splash.style.width = "100%";
-      splash.style.height = "100%";
-      splash.style.background =
-        "url('icons/splash-screen-1080x1920.png') center center / cover no-repeat";
-      splash.style.zIndex = "9999";
-      splash.style.transition = "opacity 0.5s";
-      document.body.appendChild(splash);
+        if (isFreshStart) {
+          const splash = document.createElement("div");
+          splash.style.position = "fixed";
+          splash.style.top = "0";
+          splash.style.left = "0";
+          splash.style.width = "100%";
+          splash.style.height = "100%";
+          splash.style.background =
+            "url('icons/splash-screen-1080x1920.png') center center / cover no-repeat";
+          splash.style.zIndex = "9999";
+          splash.style.transition = "opacity 0.5s";
+          document.body.appendChild(splash);
 
-      setTimeout(() => {
-        splash.style.opacity = "0";
-        setTimeout(() => splash.remove(), 500);
-      }, 3000);
+          setTimeout(() => {
+            splash.style.opacity = "0";
+            setTimeout(() => splash.remove(), 500);
+          }, 3000);
 
-      localStorage.setItem("splashShown", "true");
-    }
-  });
-</script>
-
-
+          localStorage.setItem("splashShown", "true");
+        }
+      });
+    </script>
 
     <!-- Main script -->
     <script type="module" src="./js/script.js" defer></script>
