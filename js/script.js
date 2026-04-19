@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const blok = document.createElement("div");
 
     blok.innerHTML = `
-      <a href="detail.html?id=${calc.id}">
+      <a href="../detail.html?id=${calc.id}">
         <button>${calc.titel}</button>
       </a>
     `;
