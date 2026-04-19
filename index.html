@@ -21,31 +21,39 @@
     />
     <meta name="mobile-web-app-capable" content="yes" />
 
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("./service-worker.js");
-      }
+   <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js");
+  }
 
-      // Splash screen tonen bij opstart
-      window.addEventListener("load", () => {
-        const splash = document.createElement("div");
-        splash.style.position = "fixed";
-        splash.style.top = "0";
-        splash.style.left = "0";
-        splash.style.width = "100%";
-        splash.style.height = "100%";
-        splash.style.background =
-          "url('icons/splash-screen-1080x1920.png') center center / cover no-repeat";
-        splash.style.zIndex = "9999";
-        splash.style.transition = "opacity 0.5s";
-        document.body.appendChild(splash);
+  // Splash screen alleen tonen bij eerste keer openen
+  window.addEventListener("load", () => {
+    const alreadyShown = localStorage.getItem("splashShown");
 
-        setTimeout(() => {
-          splash.style.opacity = "0";
-          setTimeout(() => splash.remove(), 500);
-        }, 3000); // 3 seconden zichtbaar
-      });
-    </script>
+    if (!alreadyShown) {
+      const splash = document.createElement("div");
+      splash.style.position = "fixed";
+      splash.style.top = "0";
+      splash.style.left = "0";
+      splash.style.width = "100%";
+      splash.style.height = "100%";
+      splash.style.background =
+        "url('icons/splash-screen-1080x1920.png') center center / cover no-repeat";
+      splash.style.zIndex = "9999";
+      splash.style.transition = "opacity 0.5s";
+      document.body.appendChild(splash);
+
+      setTimeout(() => {
+        splash.style.opacity = "0";
+        setTimeout(() => splash.remove(), 500);
+      }, 3000); // 3 seconden
+
+      // Markeer dat splash getoond is
+      localStorage.setItem("splashShown", "true");
+    }
+  });
+</script>
+
 
     <!-- Main script -->
     <script type="module" src="./js/script.js" defer></script>
