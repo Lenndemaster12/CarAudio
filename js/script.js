@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Repo-map automatisch bepalen (altijd correct)
   // Voorbeeld: /CarAudio/index.html → /CarAudio
   const path = window.location.pathname.split("/");
-  const repo = path[1]; // tweede element is altijd de repo-naam
+
+  // path[1] is ALTIJD de repo-naam, zelfs na back/reload/PWA
+  const repo = path[1];
+
+  // basePath wordt dus altijd /CarAudio
   const basePath = `/${repo}`;
 
   calculators.forEach(calc => {
