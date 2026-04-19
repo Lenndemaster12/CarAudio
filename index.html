@@ -27,7 +27,7 @@
       }
 
       window.addEventListener("load", () => {
-        const splashShown = localStorage.getItem("splashShown");
+        const splashShown = sessionStorage.getItem("splashShown");
 
         const nav = performance.getEntriesByType("navigation")[0];
         const isFreshStart =
@@ -51,7 +51,7 @@
             setTimeout(() => splash.remove(), 500);
           }, 3000);
 
-          localStorage.setItem("splashShown", "true");
+          sessionStorage.setItem("splashShown", "true");
         }
       });
     </script>
