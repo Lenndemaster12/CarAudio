@@ -1,6 +1,6 @@
 {
   "name": "CustomLowzzz",
-  "short_name": "Lowzzz",
+  "short_name": "CustomLowzzz",
   "start_url": "/CarAudio/index.html",
   "scope": "/CarAudio/",
   "display": "standalone",
