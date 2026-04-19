@@ -4,9 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("lijst");
 
-  // Automatisch de juiste map bepalen
+  // Repo-map automatisch bepalen
   // Voorbeeld: /CarAudio/index.html → /CarAudio
-  const basePath = window.location.pathname.split("/").slice(0, -1).join("");
+  const pathParts = window.location.pathname.split("/");
+  const repoName = pathParts[1]; // tweede element is altijd de repo
+  const basePath = "/" + repoName;
 
   calculators.forEach(calc => {
     const blok = document.createElement("div");
