@@ -13,8 +13,9 @@ const backBtn = document.getElementById("backBtn");
 const contentEl = document.getElementById("content");
 
 backBtn.addEventListener("click", () => {
-  window.location.href = "index.html";
+  window.location.href = "/CarAudio/index.html";
 });
+
 
 // 4. Render calculator
 if (calc) {
