@@ -1,6 +1,7 @@
 export default {
   id: 1,
   titel: "Enclosure Volume (liters)",
+  unit: "liter",
   inputs: [
     { id: "l", label: "Lengte (cm)" },
     { id: "b", label: "Breedte (cm)" },

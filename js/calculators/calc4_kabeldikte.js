@@ -1,6 +1,7 @@
 export default {
   id: 4,
   titel: "Power Cable Gauge (mm²)",
+  unit: "mm²",
   inputs: [
     { id: "watt", label: "Vermogen (W)" },
     { id: "volt", label: "Voltage", type: "select", options: [12, 13.8, 14.4], default: 12 },

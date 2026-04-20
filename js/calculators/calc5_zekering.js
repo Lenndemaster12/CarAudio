@@ -1,6 +1,7 @@
 export default {
   id: 5,
   titel: "Fuse Rating (A)",
+  unit: "A",
   inputs: [
     { id: "watt", label: "Wattage van versterker" },
     { 

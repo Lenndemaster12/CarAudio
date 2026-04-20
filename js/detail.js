@@ -269,10 +269,28 @@ Aanbevolen minimaal: ${required.toFixed(1)} cm²
     }
 
     // Resultaat tonen
+    // Resultaat tonen
     const resultaatEl = document.getElementById("resultaat");
-    resultaatEl.textContent = "= " + resultaat;
+    let unit = "";
+
+    // Dynamische unit voor calculator 6
+    if (calc.id === 6) {
+      const mode = document.getElementById("mode").value;
+    
+      if (mode.includes("Lengte")) unit = " cm";
+      if (mode.includes("Tuning")) unit = " Hz";
+    }
+
+    // Standaard unit uit calculator (voor alle andere calculators)
+    if (calc.unit) {
+      unit = " " + calc.unit;
+    }
+
+    resultaatEl.textContent = "= " + resultaat + unit;
+
     resultaatEl.style.borderWidth = "1px";
     resultaatEl.style.padding = "30px";
     resultaatEl.style.opacity = "1";
+
   });
 }

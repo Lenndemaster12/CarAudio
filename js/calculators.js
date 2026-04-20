@@ -13,5 +13,5 @@ export const calculators = [
   calc3,
   calc4,
   calc5,
-  calc7,
+  calc7
 ];
