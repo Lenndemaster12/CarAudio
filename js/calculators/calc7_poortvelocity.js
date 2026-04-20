@@ -1,6 +1,6 @@
 export default {
   id: 7,
-  titel: "Port Flow Check",
+  titel: "Port Airflow / Chuffing Check",
   inputs: [
     { id: "type", label: "Poort type", type: "select", options: ["Ronde poort", "Rechthoekige poort"] },
     { id: "power", label: "Vermogen (W RMS)" }

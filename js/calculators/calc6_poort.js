@@ -1,6 +1,6 @@
 export default {
   id: 6,
-  titel: "Port Tuning",
+  titel: "Port Tuning (Hz) / Length (cm)",
   inputs: [
     { 
       id: "mode", 

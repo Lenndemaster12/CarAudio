@@ -1,6 +1,6 @@
 export default {
   id: 3,
-  titel: "Gain Setting",
+  titel: "Amplifier Gain Setup (Vrms)",
   inputs: [
     { id: "watt", label: "Wattage" },
     { id: "ohm", label: "Ohm" }
