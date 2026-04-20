@@ -12,45 +12,39 @@
       rel="apple-touch-startup-image"
       href="icons/splash-screen-1080x1920.png"
     />
-
     <link rel="manifest" href="manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#000000" />
 
+    <!-- Instant splash (geen flits) -->
+    <style>
+      #splash {
+        position: fixed;
+        inset: 0;
+        background: url("icons/splash-screen-1080x1920.png") center
+          calc(50% - 22px) / cover no-repeat;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s;
+      }
+    </style>
+
     <script>
+      // Service worker
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
       }
 
+      // Splash fade-out
       window.addEventListener("load", () => {
-        const splashShown = sessionStorage.getItem("splashShown");
+        const splash = document.getElementById("splash");
 
-        const nav = performance.getEntriesByType("navigation")[0];
-        const isFreshStart =
-          nav.type === "navigate" && document.referrer === "" && !splashShown;
-
-        if (isFreshStart) {
-          const splash = document.createElement("div");
-          splash.style.position = "fixed";
-          splash.style.top = "0";
-          splash.style.left = "0";
-          splash.style.width = "100%";
-          splash.style.height = "100%";
-          splash.style.background =
-            "url('icons/splash-screen-1080x1920.png') center calc(50% - 44px) / cover no-repeat";
-          splash.style.zIndex = "9999";
-          splash.style.transition = "opacity 0.5s";
-          document.body.appendChild(splash);
-
-          setTimeout(() => {
-            splash.style.opacity = "0";
-            setTimeout(() => splash.remove(), 500);
-          }, 5000);
-
-          sessionStorage.setItem("splashShown", "true");
-        }
+        setTimeout(() => {
+          splash.style.opacity = "0";
+          setTimeout(() => splash.remove(), 500);
+        }, 5000);
       });
     </script>
 
@@ -62,8 +56,10 @@
   </head>
 
   <body>
-    <img src="./icons/homescreen-text.png" alt="logo CustomLowzzz" id="logo" />
+    <!-- Instant splash -->
+    <div id="splash"></div>
 
+    <img src="./icons/homescreen-text.png" alt="logo CustomLowzzz" id="logo" />
     <div id="lijst"></div>
   </body>
 </html>
