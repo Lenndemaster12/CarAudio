@@ -210,3 +210,14 @@ img {
     -webkit-box-shadow: 0 0 0 1000px var(--background-input-color) inset;
     -webkit-text-fill-color: var(--input-color);
 }
+
+
+.splash {
+  background-color: #000;
+  background-image: url('icons/splash.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 100vh;
+  width: 100vw;
+}
