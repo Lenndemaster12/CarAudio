@@ -18,47 +18,14 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#000000" />
 
-    <!-- Instant splash (geen flits) -->
-    <style>
-      #splash {
-        position: fixed;
-        inset: 0;
-        background: url("icons/splash-screen-1080x1920.png") center
-          calc(50% - 22px) / cover no-repeat;
-        z-index: 9999;
-        opacity: 1;
-        transition: opacity 0.5s;
-      }
-    </style>
-
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
       }
-
-      window.addEventListener("DOMContentLoaded", () => {
-        const splash = document.getElementById("splash");
-
-        // Check of splash al getoond is tijdens deze sessie
-        const alreadyShown = sessionStorage.getItem("splashShown");
-
-        if (alreadyShown) {
-          // Splash overslaan (bij back of reload)
-          splash.style.display = "none";
-          return;
-        }
-
-        // Splash tonen bij echte app-start
-        setTimeout(() => {
-          splash.style.opacity = "0";
-          setTimeout(() => splash.remove(), 500);
-        }, 5000);
-
-        sessionStorage.setItem("splashShown", "true");
-      });
     </script>
 
     <!-- Main script -->
+    <script src="./js/splash.js" defer></script>
     <script type="module" src="./js/script.js" defer></script>
 
     <link rel="stylesheet" href="style.css" />
