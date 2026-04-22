@@ -1,5 +1,8 @@
 import { calculators } from "./calculators.js";
 
+// Helper: komma → punt
+const num = v => parseFloat(String(v).replace(",", "."));
+
 // 1. Haal ID uit URL
 const params = new URLSearchParams(window.location.search);
 const id = parseInt(params.get("id"));
@@ -15,7 +18,6 @@ const contentEl = document.getElementById("content");
 backBtn.addEventListener("click", () => {
   window.location.href = "/CarAudio/index.html";
 });
-
 
 // 4. Render calculator
 if (calc) {
@@ -36,7 +38,7 @@ if (calc) {
 
     return `
     <div class="field">
-      <input id="${inp.id}" placeholder=" " />
+      <input id="${inp.id}" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " />
       <label for="${inp.id}">${inp.label}</label>
     </div>`;
   }).join("");
@@ -69,15 +71,15 @@ if (calc) {
 
       if (vmode === "Binnenmaten ingeven") {
         volumeFields.innerHTML = `
-          <div class="field"><input id="l" placeholder=" " /><label>Kist lengte (cm)</label></div>
-          <div class="field"><input id="b" placeholder=" " /><label>Kist breedte (cm)</label></div>
-          <div class="field"><input id="h" placeholder=" " /><label>Kist hoogte (cm)</label></div>
+          <div class="field"><input id="l" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Kist lengte (cm)</label></div>
+          <div class="field"><input id="b" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Kist breedte (cm)</label></div>
+          <div class="field"><input id="h" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Kist hoogte (cm)</label></div>
         `;
       }
 
       if (vmode === "Liters direct ingeven") {
         volumeFields.innerHTML = `
-          <div class="field"><input id="vb" placeholder=" " /><label>Kist volume (liter)</label></div>
+          <div class="field"><input id="vb" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Kist volume (liter)</label></div>
         `;
       }
     });
@@ -90,31 +92,31 @@ if (calc) {
 
       if (mode.includes("Ronde poort") && mode.includes("Lengte")) {
         extra.innerHTML = `
-          <div class="field"><input id="d" placeholder=" " /><label>Poort diameter (cm)</label></div>
-          <div class="field"><input id="fb" placeholder=" " /><label>Gewenste tuning (Hz)</label></div>
+          <div class="field"><input id="d" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poort diameter (cm)</label></div>
+          <div class="field"><input id="fb" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Gewenste tuning (Hz)</label></div>
         `;
       }
 
       if (mode.includes("Ronde poort") && mode.includes("Tuning")) {
         extra.innerHTML = `
-          <div class="field"><input id="d" placeholder=" " /><label>Poort diameter (cm)</label></div>
-          <div class="field"><input id="pl" placeholder=" " /><label>Poortlengte (cm)</label></div>
+          <div class="field"><input id="d" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poort diameter (cm)</label></div>
+          <div class="field"><input id="pl" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poortlengte (cm)</label></div>
         `;
       }
 
       if (mode.includes("Rechthoekige") && mode.includes("Lengte")) {
         extra.innerHTML = `
-          <div class="field"><input id="ph" placeholder=" " /><label>Poort hoogte (cm)</label></div>
-          <div class="field"><input id="pw" placeholder=" " /><label>Poort breedte (cm)</label></div>
-          <div class="field"><input id="fb" placeholder=" " /><label>Gewenste tuning (Hz)</label></div>
+          <div class="field"><input id="ph" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poort hoogte (cm)</label></div>
+          <div class="field"><input id="pw" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poort breedte (cm)</label></div>
+          <div class="field"><input id="fb" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Gewenste tuning (Hz)</label></div>
         `;
       }
 
       if (mode.includes("Rechthoekige") && mode.includes("Tuning")) {
         extra.innerHTML = `
-          <div class="field"><input id="ph" placeholder=" " /><label>Poort hoogte (cm)</label></div>
-          <div class="field"><input id="pw" placeholder=" " /><label>Poort breedte (cm)</label></div>
-          <div class="field"><input id="pl" placeholder=" " /><label>Poortlengte (cm)</label></div>
+          <div class="field"><input id="ph" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poort hoogte (cm)</label></div>
+          <div class="field"><input id="pw" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poort breedte (cm)</label></div>
+          <div class="field"><input id="pl" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Poortlengte (cm)</label></div>
         `;
       }
     });
@@ -129,14 +131,14 @@ if (calc) {
 
       if (type === "Ronde poort") {
         extra.innerHTML = `
-          <div class="field"><input id="d" placeholder=" " /><label>Diameter (cm)</label></div>
+          <div class="field"><input id="d" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Diameter (cm)</label></div>
         `;
       }
 
       if (type === "Rechthoekige poort") {
         extra.innerHTML = `
-          <div class="field"><input id="h" placeholder=" " /><label>Hoogte (cm)</label></div>
-          <div class="field"><input id="w" placeholder=" " /><label>Breedte (cm)</label></div>
+          <div class="field"><input id="h" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Hoogte (cm)</label></div>
+          <div class="field"><input id="w" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+" placeholder=" " /><label>Breedte (cm)</label></div>
         `;
       }
     });
@@ -147,15 +149,15 @@ if (calc) {
   // -----------------------------
 
   document.getElementById("berekenBtn").addEventListener("click", () => {
+
     // Verzamel alle basis inputs automatisch
-const values = {};
-calc.inputs.forEach(inp => {
-  const el = document.getElementById(inp.id);
-  if (el) values[inp.id] = el.value;
-});
+    const values = {};
+    calc.inputs.forEach(inp => {
+      const el = document.getElementById(inp.id);
+      if (el) values[inp.id] = el.value;
+    });
 
-let resultaat = calc.bereken(values);
-
+    let resultaat = calc.bereken(values);
 
     // PORT TUNING (id 6)
     if (calc.id === 6) {
@@ -165,20 +167,20 @@ let resultaat = calc.bereken(values);
       let Vb = 0;
 
       if (vmode === "Binnenmaten ingeven") {
-        const l = parseFloat(document.getElementById("l")?.value);
-        const b = parseFloat(document.getElementById("b")?.value);
-        const h = parseFloat(document.getElementById("h")?.value);
+        const l = num(document.getElementById("l")?.value);
+        const b = num(document.getElementById("b")?.value);
+        const h = num(document.getElementById("h")?.value);
         Vb = (l * b * h) / 1000;
       }
 
       if (vmode === "Liters direct ingeven") {
-        Vb = parseFloat(document.getElementById("vb")?.value);
+        Vb = num(document.getElementById("vb")?.value);
       }
 
       // Ronde poort → Lengte
       if (mode.includes("Ronde poort") && mode.includes("Lengte")) {
-        const d = parseFloat(document.getElementById("d").value);
-        const fb = parseFloat(document.getElementById("fb").value);
+        const d = num(document.getElementById("d").value);
+        const fb = num(document.getElementById("fb").value);
 
         const L = (23562.5 * (d ** 2)) / (fb ** 2 * Vb) - 0.732 * d;
         resultaat = `Poortlengte = ${L.toFixed(2)} cm`;
@@ -186,8 +188,8 @@ let resultaat = calc.bereken(values);
 
       // Ronde poort → Tuning
       if (mode.includes("Ronde poort") && mode.includes("Tuning")) {
-        const d = parseFloat(document.getElementById("d").value);
-        const pl = parseFloat(document.getElementById("pl").value);
+        const d = num(document.getElementById("d").value);
+        const pl = num(document.getElementById("pl").value);
 
         const Fb = Math.sqrt((23562.5 * (d ** 2)) / (Vb * (pl + 0.732 * d)));
         resultaat = `Tuning = ${Fb.toFixed(2)} Hz`;
@@ -195,9 +197,9 @@ let resultaat = calc.bereken(values);
 
       // Rechthoekige → Lengte
       if (mode.includes("Rechthoekige") && mode.includes("Lengte")) {
-        const ph = parseFloat(document.getElementById("ph").value);
-        const pw = parseFloat(document.getElementById("pw").value);
-        const fb = parseFloat(document.getElementById("fb").value);
+        const ph = num(document.getElementById("ph").value);
+        const pw = num(document.getElementById("pw").value);
+        const fb = num(document.getElementById("fb").value);
 
         const A = ph * pw;
         const D = Math.sqrt((4 * A) / Math.PI);
@@ -208,9 +210,9 @@ let resultaat = calc.bereken(values);
 
       // Rechthoekige → Tuning
       if (mode.includes("Rechthoekige") && mode.includes("Tuning")) {
-        const ph = parseFloat(document.getElementById("ph").value);
-        const pw = parseFloat(document.getElementById("pw").value);
-        const pl = parseFloat(document.getElementById("pl").value);
+        const ph = num(document.getElementById("ph").value);
+        const pw = num(document.getElementById("pw").value);
+        const pl = num(document.getElementById("pl").value);
 
         const A = ph * pw;
         const D = Math.sqrt((4 * A) / Math.PI);
@@ -223,7 +225,7 @@ let resultaat = calc.bereken(values);
     // PORT AREA CHECK (id 7)
     if (calc.id === 7) {
       const type = document.getElementById("type")?.value;
-      const power = parseFloat(document.getElementById("power")?.value);
+      const power = num(document.getElementById("power")?.value);
 
       if (!type) {
         resultaat = "Kies eerst een poorttype.";
@@ -233,7 +235,7 @@ let resultaat = calc.bereken(values);
         let A = 0; // cm²
 
         if (type === "Ronde poort") {
-          const d = parseFloat(document.getElementById("d")?.value);
+          const d = num(document.getElementById("d")?.value);
           if (isNaN(d) || d <= 0) {
             resultaat = "Vul een geldige diameter in (cm).";
           } else {
@@ -242,8 +244,8 @@ let resultaat = calc.bereken(values);
         }
 
         if (type === "Rechthoekige poort") {
-          const h = parseFloat(document.getElementById("h")?.value);
-          const w = parseFloat(document.getElementById("w")?.value);
+          const h = num(document.getElementById("h")?.value);
+          const w = num(document.getElementById("w")?.value);
           if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
             resultaat = "Vul geldige hoogte en breedte in (cm).";
           } else {
@@ -269,28 +271,30 @@ Aanbevolen minimaal: ${required.toFixed(1)} cm²
     }
 
     // Resultaat tonen
-    // Resultaat tonen
     const resultaatEl = document.getElementById("resultaat");
     let unit = "";
 
-    // Dynamische unit voor calculator 6
-    if (calc.id === 6) {
-      const mode = document.getElementById("mode").value;
-    
-      if (mode.includes("Lengte")) unit = " cm";
-      if (mode.includes("Tuning")) unit = " Hz";
-    }
+    // IDs waarbij GEEN unit mag worden toegevoegd
+    const skipUnits = [6];
+
 
     // Standaard unit uit calculator (voor alle andere calculators)
-    if (calc.unit) {
+    if (calc.unit && !skipUnits.includes(calc.id)) {
       unit = " " + calc.unit;
     }
 
+    // Alleen eindresultaat afronden op 2 decimalen
+    if (typeof resultaat === "number") {
+      resultaat = resultaat.toFixed(2);
+    }
+
+    // Tekstresultaten met getallen erin NIET aanpassen
     resultaatEl.textContent = "= " + resultaat + unit;
 
     resultaatEl.style.borderWidth = "1px";
     resultaatEl.style.padding = "30px";
     resultaatEl.style.opacity = "1";
+
 
   });
 }

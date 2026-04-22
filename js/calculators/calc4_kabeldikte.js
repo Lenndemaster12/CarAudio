@@ -1,7 +1,7 @@
 export default {
   id: 4,
   titel: "Power Cable Gauge (mm²)",
-  unit: "mm²",
+  unit: "",
   inputs: [
     { id: "watt", label: "Vermogen (W)" },
     { id: "volt", label: "Voltage", type: "select", options: [12, 13.8, 14.4], default: 12 },
@@ -97,6 +97,12 @@ export default {
     const combinatie = berekenCombinatie(dikte);
     const totaal = combinatie.reduce((a, b) => a + b, 0);
 
+    // FIX: Als er maar 1 kabel is → GEEN tweede regel
+    if (combinatie.length === 1) {
+      return `${I.toFixed(2)} A → ${totaal} mm² (${materiaal})`;
+    }
+
+    // Meerdere kabels → toon combinatie
     return `${I.toFixed(2)} A → ${totaal} mm² (${materiaal})\n${combinatie.join(" mm² + ")} mm²`;
   }
 };
